@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ResourceApi\Api;
+namespace ResourceFoundation\Api;
 
 /**
  * Generic interface for accessing and managing data entities.

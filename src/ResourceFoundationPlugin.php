@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ResourceApi;
+namespace ResourceFoundation;
 
 use Base3\Api\IContainer;
 use Base3\Api\IPlugin;
 
-class ResourceApiPlugin implements IPlugin {
+class ResourceFoundationPlugin implements IPlugin {
 
 	public function __construct(private readonly IContainer $container) {}
 
 	// Implementation of IBase
 
 	public static function getName(): string {
-		return 'resourceapiplugin';
+		return 'resourcefoundationplugin';
 	}
 
 	// Implementation of IPlugin

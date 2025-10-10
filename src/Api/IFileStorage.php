@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ResourceApi\Api;
+namespace ResourceFoundation\Api;
 
 /**
  * IFileStorage defines a generic interface for accessing files and directories.

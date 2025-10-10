@@ -1,12 +1,12 @@
-# ResourceApi
+# ResourceFoundation
 
-**ResourceApi** is a core component of the BASE3 framework that provides a unified, extensible data access layer for all types of system resources. It acts as a bridge between different kinds of resource backends such as XRM entities, file systems, and relational data sources.
+**ResourceFoundation** is a core component of the BASE3 framework that provides a unified, extensible data access layer for all types of system resources. It acts as a bridge between different kinds of resource backends such as XRM entities, file systems, and relational data sources.
 
 ---
 
 ## Overview
 
-ResourceApi defines common interfaces and base classes for loading, saving, and managing resources, whether they are database entries, structured entities, or file-based objects. It enables other BASE3 plugins, like Cognora or MissionBay, to work with data in a consistent and abstracted way.
+ResourceFoundation defines common interfaces and base classes for loading, saving, and managing resources, whether they are database entries, structured entities, or file-based objects. It enables other BASE3 plugins, like Cognora or MissionBay, to work with data in a consistent and abstracted way.
 
 ### Core Concepts
 
@@ -63,7 +63,7 @@ $xrm->saveEntry($entry);
 
 ### WebDAV / Nextcloud
 
-A WebDAV adapter can expose any ResourceApi-compatible service as a DAV endpoint. The `IFileStorage` interface maps directly to WebDAV operations like PROPFIND, GET, PUT, and DELETE.
+A WebDAV adapter can expose any ResourceFoundation-compatible service as a DAV endpoint. The `IFileStorage` interface maps directly to WebDAV operations like PROPFIND, GET, PUT, and DELETE.
 
 ```php
 $storage->write('/projects/demo/readme.txt', 'Hello world');
@@ -76,21 +76,21 @@ This allows BASE3 systems to integrate seamlessly with external file services li
 
 ## Layer Integration
 
-ResourceApi is designed to coexist with other major BASE3 APIs:
+ResourceFoundation is designed to coexist with other major BASE3 APIs:
 
-| API              | Purpose                                                 |
-| ---------------- | ------------------------------------------------------- |
-| **AssistentApi** | AI and automation features (e.g., MissionBay, OpenAI)   |
-| **ReportApi**    | Reporting, querying, and visualization (DataHawk)       |
-| **ResourceApi**  | Core data and object management (XRM, files, relations) |
+| API                     | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- |
+| **AssistentFoundation** | AI and automation features (e.g., MissionBay, OpenAI)   |
+| **ReportFoundation**    | Reporting, querying, and visualization (DataHawk)       |
+| **ResourceFoundation**  | Core data and object management (XRM, files, relations) |
 
-Each API is independent but interoperable. For example, ReportApi can query data provided by ResourceApi, and AssistentApi can modify or enrich entities stored via ResourceApi.
+Each API is independent but interoperable. For example, ReportFoundation can query data provided by ResourceFoundation, and AssistentFoundation can modify or enrich entities stored via ResourceFoundation.
 
 ---
 
 ## Extensibility
 
-Developers can extend ResourceApi by implementing custom storage or data backends:
+Developers can extend ResourceFoundation by implementing custom storage or data backends:
 
 * `DatabaseEntityService` for SQL-based entities
 * `WebdavFileStorage` for remote files
@@ -101,5 +101,5 @@ Developers can extend ResourceApi by implementing custom storage or data backend
 
 ## Summary
 
-ResourceApi unifies entity management, file storage, and data relations under one consistent interface. It is the foundation for content, document, and knowledge management in the BASE3 ecosystem, enabling integrations across Cognora, MissionBay, and future extensions.
+ResourceFoundation unifies entity management, file storage, and data relations under one consistent interface. It is the foundation for content, document, and knowledge management in the BASE3 ecosystem, enabling integrations across Cognora, MissionBay, and future extensions.
 
