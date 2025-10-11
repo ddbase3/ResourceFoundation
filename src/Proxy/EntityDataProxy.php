@@ -2,15 +2,14 @@
 
 namespace ResourceFoundation\Proxy;
 
-use Base3\Api\IProxy;
-use Base3\Api\IConnector;
+use Base3\Microservice\Api\IMicroserviceConnector;
 use Base3\Microservice\AbstractMicroservice;
 use ResourceFoundation\Api\IEntityDataService;
 
-class EntityDataProxy extends AbstractMicroservice implements IEntityDataService, IProxy {
+class EntityDataProxy extends AbstractMicroservice implements IEntityDataService {
 
 	public function __construct(
-		private readonly IEntityDataService|IConnector $entityDataService
+		private readonly IEntityDataService|IMicroserviceConnector $entityDataService
 	) {}
 
 	// Implementation of IEntityDataService
@@ -29,11 +28,5 @@ class EntityDataProxy extends AbstractMicroservice implements IEntityDataService
 
 	public function deleteEntry(int|string $id): bool {
 		return $this->entityDataService->deleteEntry($id);
-	}
-
-	// Implementation of IProxy
-
-	public function getProxiedInstance(): object {
-		return $this->entityDataService;
 	}
 }
