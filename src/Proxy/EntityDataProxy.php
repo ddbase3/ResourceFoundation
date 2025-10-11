@@ -19,7 +19,7 @@ class EntityDataProxy extends AbstractMicroservice implements IEntityDataService
 	}
 
 	public function getEntry(int|string $id, array $options = []): ?array {
-		return $this->entityDataService->getEntry($id, options);
+		return $this->entityDataService->getEntry($id, $options);
 	}
 
 	public function saveEntry(array $data): int|string {
