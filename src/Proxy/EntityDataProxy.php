@@ -2,12 +2,15 @@
 
 namespace ResourceFoundation\Proxy;
 
+use Base3\Microservice\Api\IMicroserviceConnector;
 use Base3\Microservice\AbstractMicroservice;
 use ResourceFoundation\Api\IEntityDataService;
 
 class EntityDataProxy extends AbstractMicroservice implements IEntityDataService {
 
-	public function __construct(private readonly IEntityDataService $entityDataService) {}
+	public function __construct(
+		private readonly IEntityDataService|IMicroserviceConnector $entityDataService
+	) {}
 
 	// Implementation of IEntityDataService
 
