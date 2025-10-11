@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ResourceFoundation\Adapter;
+namespace ResourceFoundation\Proxy;
 
 use Base3\Microservice\AbstractMicroservice;
 use ResourceFoundation\Api\IEntityDataService;
 
-class EntityDataMicroservice extends AbstractMicroservice implements IEntityDataService {
+class EntityDataProxy extends AbstractMicroservice implements IEntityDataService {
 
 	public function __construct(private readonly IEntityDataService $entityDataService) {}
 
