@@ -14,7 +14,7 @@ class EntityDataProxy implements IEntityDataService {
 	// Implementation of IEntityDataService
 
 	public function getEntries(array $options = []): array {
-		return $this->entityDataService->getEntries($options);
+		return $this->entityDataService->getEntries($options) ?? [];
 	}
 
 	public function getEntry(int|string $id, array $options = []): ?array {
@@ -22,10 +22,10 @@ class EntityDataProxy implements IEntityDataService {
 	}
 
 	public function saveEntry(array $data): int|string {
-		return $this->entityDataService->saveEntry($data);
+		return $this->entityDataService->saveEntry($data) ?? 0;
 	}
 
 	public function deleteEntry(int|string $id): bool {
-		return $this->entityDataService->deleteEntry($id);
+		return $this->entityDataService->deleteEntry($id) ?? false;
 	}
 }
