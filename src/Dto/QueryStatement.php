@@ -1,0 +1,26 @@
+<?php declare(strict_types=1);
+
+namespace ResourceFoundation\Dto;
+
+/**
+ * Represents a compiled SQL query including raw SQL,
+ * bound parameters, selected field metadata, and sensitivity flag.
+ */
+class QueryStatement {
+
+	/**
+	 * @param string $sql              The compiled SQL statement.
+	 * @param array $params            Bound parameters for the SQL query.
+	 * @param array $fields            Metadata for selected fields (name, alias, table, etc.).
+	 * @param bool $sensitive          True if query touches sensitive data.
+	 * @param bool $isWildcardQuery    True if query includes wildcard fields (e.g. table.* or *).
+	 */
+	public function __construct(
+		public string $sql,
+		public array $params = [],
+		public array $fields = [],
+		public bool $sensitive = false,
+		public bool $isWildcardQuery = false
+	) {}
+}
+
