@@ -21,8 +21,12 @@ class EntityDataProxy implements IEntityDataService {
 		return $this->entityDataService->getEntry($id, $options);
 	}
 
-	public function saveEntry(array $data): int|string {
-		return $this->entityDataService->saveEntry($data) ?? 0;
+	public function createEntry(array $data): int|string {
+		return $this->entityDataService->createEntry($data) ?? 0;
+	}
+
+	public function updateEntry(int|string $id, array $patch): int|string {
+		return $this->entityDataService->updateEntry($id, $patch) ?? 0;
 	}
 
 	public function deleteEntry(int|string $id): bool {

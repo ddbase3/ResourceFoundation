@@ -26,7 +26,8 @@ A generic CRUD interface for data resources.
 ```php
 public function getEntries(array $options = []): array;
 public function getEntry(int|string $id, array $options = []): ?array;
-public function saveEntry(array $data): int|string;
+public function createEntry(array $data): int|string;
+public function updateEntry(int|string $id, array $patch): int|string;
 public function deleteEntry(int|string $id): bool;
 ```
 
@@ -58,7 +59,7 @@ Cognora implements `IEntityDataService` to access and manage XRM-style entities 
 ```php
 $entry = $xrm->getEntry(123, ["loadtags" => true]);
 $entry['tags'][] = 'important';
-$xrm->saveEntry($entry);
+$xrm->updateEntry(123, $entry);
 ```
 
 ### WebDAV / Nextcloud

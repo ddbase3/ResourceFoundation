@@ -42,21 +42,42 @@ class EntityDataProxyTest extends TestCase {
 		$this->assertNull($out);
 	}
 
-	public function testSaveEntryDelegatesAndFallsBackToZero(): void {
+	public function testCreateEntryDelegatesAndFallsBackToZero(): void {
 		$conn = new FakeEntityDataConnector();
 		$proxy = new EntityDataProxy($conn);
 
-		$conn->saveResult = null;
-		$out = $proxy->saveEntry(['name' => 'x']);
+		$conn->createResult = null;
+		$out = $proxy->createEntry(['name' => 'x']);
 
-		$this->assertSame('saveEntry', $conn->lastCall);
+		$this->assertSame('createEntry', $conn->lastCall);
 		$this->assertSame([['name' => 'x']], $conn->lastArgs);
 		$this->assertSame(0, $out);
 
-		$conn->saveResult = 42;
-		$out = $proxy->saveEntry(['name' => 'y']);
+		$conn->createResult = 42;
+		$out = $proxy->createEntry(['name' => 'y']);
 
+		$this->assertSame('createEntry', $conn->lastCall);
+		$this->assertSame([['name' => 'y']], $conn->lastArgs);
 		$this->assertSame(42, $out);
+	}
+
+	public function testUpdateEntryDelegatesAndFallsBackToZero(): void {
+		$conn = new FakeEntityDataConnector();
+		$proxy = new EntityDataProxy($conn);
+
+		$conn->updateResult = null;
+		$out = $proxy->updateEntry(7, ['name' => 'x']);
+
+		$this->assertSame('updateEntry', $conn->lastCall);
+		$this->assertSame([7, ['name' => 'x']], $conn->lastArgs);
+		$this->assertSame(0, $out);
+
+		$conn->updateResult = 99;
+		$out = $proxy->updateEntry('abc', ['name' => 'y']);
+
+		$this->assertSame('updateEntry', $conn->lastCall);
+		$this->assertSame(['abc', ['name' => 'y']], $conn->lastArgs);
+		$this->assertSame(99, $out);
 	}
 
 	public function testDeleteEntryDelegatesAndFallsBackToFalse(): void {
@@ -75,14 +96,14 @@ class EntityDataProxyTest extends TestCase {
 
 		$this->assertTrue($out);
 	}
-
 }
 
 class FakeEntityDataConnector implements IMicroserviceConnector {
 
 	public ?array $entriesResult = null;
 	public ?array $entryResult = null;
-	public int|string|null $saveResult = null;
+	public int|string|null $createResult = null;
+	public int|string|null $updateResult = null;
 	public ?bool $deleteResult = null;
 
 	public ?string $lastCall = null;
@@ -104,10 +125,16 @@ class FakeEntityDataConnector implements IMicroserviceConnector {
 		return $this->entryResult;
 	}
 
-	public function saveEntry(array $data): int|string|null {
-		$this->lastCall = 'saveEntry';
+	public function createEntry(array $data): int|string|null {
+		$this->lastCall = 'createEntry';
 		$this->lastArgs = [$data];
-		return $this->saveResult;
+		return $this->createResult;
+	}
+
+	public function updateEntry(int|string $id, array $patch): int|string|null {
+		$this->lastCall = 'updateEntry';
+		$this->lastArgs = [$id, $patch];
+		return $this->updateResult;
 	}
 
 	public function deleteEntry(int|string $id): ?bool {
@@ -115,5 +142,4 @@ class FakeEntityDataConnector implements IMicroserviceConnector {
 		$this->lastArgs = [$id];
 		return $this->deleteResult;
 	}
-
 }

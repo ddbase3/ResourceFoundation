@@ -29,13 +29,23 @@ interface IEntityDataService {
 	public function getEntry(int|string $id, array $options = []): ?array;
 
 	/**
-	 * Creates or updates an entity based on the provided data.
-	 * Implementations should detect whether to insert or update.
+	 * Creates a new entity based on the provided data.
 	 *
-	 * @param array $data Entity data to save
-	 * @return int|string ID of the saved entity
+	 * @param array $data Entity data to create
+	 * @return int|string ID of the created entity
 	 */
-	public function saveEntry(array $data): int|string;
+	public function createEntry(array $data): int|string;
+
+	/**
+	 * Updates an existing entity by applying the provided patch.
+	 * Fields not present in $patch must not be overwritten.
+	 * Explicit null values in $patch mean deletion/unset (implementation-defined per field/table).
+	 *
+	 * @param int|string $id Entity identifier
+	 * @param array $patch Partial entity data to apply
+	 * @return int|string ID of the updated entity
+	 */
+	public function updateEntry(int|string $id, array $patch): int|string;
 
 	/**
 	 * Deletes an entity by its identifier.
@@ -45,4 +55,3 @@ interface IEntityDataService {
 	 */
 	public function deleteEntry(int|string $id): bool;
 }
-
