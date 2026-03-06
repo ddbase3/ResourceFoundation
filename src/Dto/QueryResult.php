@@ -20,11 +20,15 @@ class QueryResult {
 	 * @param array $rows Array of result rows: associative arrays
 	 * @param string|null $debugSql Optional debug SQL string
 	 * @param bool $sensitive Result contains sensitive data
+	 * @param int|null $affectedRows Affected rows for write queries (INSERT/UPDATE/DELETE)
+	 * @param int|string|null $insertId Insert ID for INSERT queries (backend-dependent)
 	 */
 	public function __construct(
 		public array $columns,
 		public array $rows,
 		public ?string $debugSql = null,
-		public bool $sensitive = false
+		public bool $sensitive = false,
+		public ?int $affectedRows = null,
+		public int|string|null $insertId = null
 	) {}
 }
