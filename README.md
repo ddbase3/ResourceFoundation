@@ -81,12 +81,12 @@ ResourceFoundation is designed to coexist with other major BASE3 APIs:
 
 | API                      | Purpose                                                                                                                    |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **AssistentFoundation**  | AI and automation features (e.g., MissionBay, OpenAI)                                                                      |
+| **AssistantFoundation**  | AI and automation features (e.g., MissionBay, OpenAI)                                                                      |
 | **ResourceFoundation**   | Reporting, querying, and visualization (DataHawk, Vizion, Memora); Core data and object management (XRM, files, relations) |
 | **MediaFoundation**      | API for image, video, and audio editing, transformation, and analysis                                                      |
 | **PublishingFoundation** | Publishing and content distribution across external platforms                                                              |
 
-Each API is independent but interoperable. For example, ReportFoundation can query data provided by ResourceFoundation, and AssistentFoundation can modify or enrich entities stored via ResourceFoundation.
+Each API is independent but interoperable. For example, ReportFoundation can query data provided by ResourceFoundation, and AssistantFoundation can modify or enrich entities stored via ResourceFoundation.
 
 ---
 
