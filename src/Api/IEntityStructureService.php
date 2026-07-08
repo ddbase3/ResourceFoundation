@@ -59,6 +59,26 @@ interface IEntityStructureService {
 	/** @param array<string,mixed> $scope Scope data */
 	public function createScope(array $scope): string;
 
+	/**
+	 * Returns scope-module assignments.
+	 *
+	 * When $scope is null, all assignments are returned. When $scope is set,
+	 * only assignments for that scope are returned.
+	 *
+	 * @return array<int,array{scope:string,module:string}>
+	 */
+	public function getScopeModules(?string $scope = null): array;
+
+	/**
+	 * Returns module-scope assignments.
+	 *
+	 * When $module is null, all assignments are returned. When $module is set,
+	 * only assignments for that module are returned.
+	 *
+	 * @return array<int,array{module:string,scope:string}>
+	 */
+	public function getModuleScopes(?string $module = null): array;
+
 	/** Assigns a module to a scope. */
 	public function assignModuleToScope(string $module, string $scope): void;
 

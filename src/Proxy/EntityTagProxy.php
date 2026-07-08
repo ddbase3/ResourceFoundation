@@ -52,6 +52,11 @@ class EntityTagProxy implements IEntityTagService {
 	}
 
 
+	public function getModuleTags(?string $module = null): array {
+		return $this->entityTagService->getModuleTags($module) ?? [];
+	}
+
+
 	public function describeTag(string $tag, string $description): void {
 		$this->entityTagService->describeTag($tag, $description);
 	}

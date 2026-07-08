@@ -63,6 +63,16 @@ interface IEntityTagService {
 	public function getTags(?string $scope = null): array;
 
 	/**
+	 * Returns module-tag assignments.
+	 *
+	 * When $module is null, all assignments are returned. When $module is set,
+	 * only assignments for that module are returned.
+	 *
+	 * @return array<int,array{module:string,tag:string}>
+	 */
+	public function getModuleTags(?string $module = null): array;
+
+	/**
 	 * Creates or updates a tag description.
 	 *
 	 * @param string $tag Tag name

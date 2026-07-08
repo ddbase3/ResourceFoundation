@@ -82,6 +82,16 @@ class EntityStructureProxy implements IEntityStructureService {
 	}
 
 
+	public function getScopeModules(?string $scope = null): array {
+		return $this->entityStructureService->getScopeModules($scope) ?? [];
+	}
+
+
+	public function getModuleScopes(?string $module = null): array {
+		return $this->entityStructureService->getModuleScopes($module) ?? [];
+	}
+
+
 	public function assignModuleToScope(string $module, string $scope): void {
 		$this->entityStructureService->assignModuleToScope($module, $scope);
 	}
