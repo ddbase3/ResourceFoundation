@@ -20,18 +20,16 @@ namespace ResourceFoundation\Api;
 /**
  * Provides access-control administration for entity backends.
  *
- * The interface separates entry-level grants from reusable roles. Implementations
- * may support direct user grants, group grants, role grants, user-role mappings,
- * group-role mappings, and user-group membership. Role rows are expected to carry
- * their own scope and permission semantics.
+ * Entry-level ACL grants stay attached directly to users and groups. Reusable
+ * roles and permissions are administered separately through role, permission,
+ * user-role, group-role, and role-permission relations.
  */
 interface IEntityAccessService {
 
 	/**
 	 * Returns all direct access grants for an entry.
 	 *
-	 * The returned array should use the keys useraccess, groupaccess, and
-	 * roleaccess when the backend supports those grant types.
+	 * The returned array should use the keys useraccess and groupaccess.
 	 *
 	 * @param int|string $entryId Entity identifier
 	 * @return array<string,array<int,array<string,mixed>>> Access grants grouped by grant type
@@ -55,14 +53,6 @@ interface IEntityAccessService {
 	public function replaceEntryGroupAccess(int|string $entryId, array $access): void;
 
 	/**
-	 * Replaces the complete role-access list for an entry.
-	 *
-	 * @param int|string $entryId Entity identifier
-	 * @param array<int,array<string,mixed>> $access Role access rows
-	 */
-	public function replaceEntryRoleAccess(int|string $entryId, array $access): void;
-
-	/**
 	 * Returns known roles.
 	 *
 	 * @param bool $includeArchived Whether archived roles should be returned
@@ -81,7 +71,7 @@ interface IEntityAccessService {
 	/**
 	 * Creates a role.
 	 *
-	 * Common role keys are name, scope, permission, label, info, and archive.
+	 * Common role keys are name, label, info, archive, permission_ids, and permissions.
 	 *
 	 * @param array<string,mixed> $role Role data
 	 * @return int|string Created role identifier
@@ -102,6 +92,63 @@ interface IEntityAccessService {
 	 * @param int|string $roleId Role identifier
 	 */
 	public function archiveRole(int|string $roleId): void;
+
+	/**
+	 * Returns known permissions.
+	 *
+	 * @param bool $includeArchived Whether archived permissions should be returned
+	 * @return array<int,array<string,mixed>> Permission rows
+	 */
+	public function getPermissions(bool $includeArchived = false): array;
+
+	/**
+	 * Returns one permission by identifier.
+	 *
+	 * @param int|string $permissionId Permission identifier
+	 * @return array<string,mixed>|null Permission row or null
+	 */
+	public function getPermission(int|string $permissionId): ?array;
+
+	/**
+	 * Creates a permission.
+	 *
+	 * Common permission keys are scope, permission, label, info, and archive.
+	 *
+	 * @param array<string,mixed> $permission Permission data
+	 * @return int|string Created permission identifier
+	 */
+	public function createPermission(array $permission): int|string;
+
+	/**
+	 * Updates a permission.
+	 *
+	 * @param int|string $permissionId Permission identifier
+	 * @param array<string,mixed> $patch Partial permission data
+	 */
+	public function updatePermission(int|string $permissionId, array $patch): void;
+
+	/**
+	 * Archives a permission.
+	 *
+	 * @param int|string $permissionId Permission identifier
+	 */
+	public function archivePermission(int|string $permissionId): void;
+
+	/**
+	 * Returns permissions assigned to a role.
+	 *
+	 * @param int|string $roleId Role identifier
+	 * @return array<int,array<string,mixed>> Permission rows
+	 */
+	public function getRolePermissions(int|string $roleId): array;
+
+	/**
+	 * Replaces all permissions assigned to a role.
+	 *
+	 * @param int|string $roleId Role identifier
+	 * @param array<int,int|string> $permissionIds Permission identifiers
+	 */
+	public function replaceRolePermissions(int|string $roleId, array $permissionIds): void;
 
 	/**
 	 * Returns roles directly assigned to a user.

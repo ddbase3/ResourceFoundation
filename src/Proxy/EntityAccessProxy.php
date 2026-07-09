@@ -42,11 +42,6 @@ class EntityAccessProxy implements IEntityAccessService {
 	}
 
 
-	public function replaceEntryRoleAccess(int|string $entryId, array $access): void {
-		$this->entityAccessService->replaceEntryRoleAccess($entryId, $access);
-	}
-
-
 	public function getRoles(bool $includeArchived = false): array {
 		return $this->entityAccessService->getRoles($includeArchived) ?? [];
 	}
@@ -69,6 +64,41 @@ class EntityAccessProxy implements IEntityAccessService {
 
 	public function archiveRole(int|string $roleId): void {
 		$this->entityAccessService->archiveRole($roleId);
+	}
+
+
+	public function getPermissions(bool $includeArchived = false): array {
+		return $this->entityAccessService->getPermissions($includeArchived) ?? [];
+	}
+
+
+	public function getPermission(int|string $permissionId): ?array {
+		return $this->entityAccessService->getPermission($permissionId);
+	}
+
+
+	public function createPermission(array $permission): int|string {
+		return $this->entityAccessService->createPermission($permission) ?? 0;
+	}
+
+
+	public function updatePermission(int|string $permissionId, array $patch): void {
+		$this->entityAccessService->updatePermission($permissionId, $patch);
+	}
+
+
+	public function archivePermission(int|string $permissionId): void {
+		$this->entityAccessService->archivePermission($permissionId);
+	}
+
+
+	public function getRolePermissions(int|string $roleId): array {
+		return $this->entityAccessService->getRolePermissions($roleId) ?? [];
+	}
+
+
+	public function replaceRolePermissions(int|string $roleId, array $permissionIds): void {
+		$this->entityAccessService->replaceRolePermissions($roleId, $permissionIds);
 	}
 
 
