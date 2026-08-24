@@ -271,13 +271,20 @@ ResourceFoundation defines the shared contracts used by independent reporting pl
 IQuerySchemaDefinitionProvider
 IMaterializationDefinitionProvider
 IReportConfigDefinitionProvider
+IReportingScopeDefinitionProvider
+IReportingScopeRegistry
 IScopedQuerySchemaProvider
 IScopedMaterializationManifestProvider
+ReportingScopeDefinition
 ```
 
-Definition providers are discoverable BASE3 components. Each provider owns one logical scope and returns named definition datasets. A dataset may carry an `enabled` flag and contains its declarative `definition`. The storage backend is deliberately outside the contract. A provider may use `ISettingsStore`, files, or another source.
+Definition providers are discoverable BASE3 components. Each provider owns one technical scope and returns named definition datasets. A dataset may carry an `enabled` flag and contains its declarative `definition`. The storage backend is deliberately outside the contract. A provider may use `ISettingsStore`, files, or another source.
 
-Scoped runtime providers expose the central aggregated view while preserving scope as part of identity. This allows two independent plugins to use the same local table, manifest, or report identifier without requiring project-specific composition.
+`IReportingScopeDefinitionProvider` groups those technical scopes into one user-facing reporting area. `ReportingScopeDefinition` contains a stable reporting id and label plus the query-schema, materialization and report scopes that belong to that reporting area. For example, an ILIAS reporting plugin can group `ilias_source`, `ilias_materialized` and `ilias_reporting` under one `ILIAS` reporting scope.
+
+`IReportingScopeRegistry` is the known runtime service for resolving those user-facing reporting scopes. Implementations aggregate the discoverable definitions and keep technical scope ownership unambiguous.
+
+Scoped runtime providers still preserve technical scope as part of backend identity. This allows two independent plugins to use the same local table, manifest, or report identifier without exposing those implementation scopes as separate user choices.
 
 ### `IQueryCompiler`
 
