@@ -263,6 +263,22 @@ public function getTable(string $tableName): ?TableMetadata;
 
 Implementations expose table metadata, field metadata, joins, foreign keys, domains, categories, and tags.
 
+### Reporting definition and scope contracts
+
+ResourceFoundation defines the shared contracts used by independent reporting plugins to contribute definitions without depending on DataHawk or Vizion implementations.
+
+```text
+IQuerySchemaDefinitionProvider
+IMaterializationDefinitionProvider
+IReportConfigDefinitionProvider
+IScopedQuerySchemaProvider
+IScopedMaterializationManifestProvider
+```
+
+Definition providers are discoverable BASE3 components. Each provider owns one logical scope and returns named definition datasets. A dataset may carry an `enabled` flag and contains its declarative `definition`. The storage backend is deliberately outside the contract. A provider may use `ISettingsStore`, files, or another source.
+
+Scoped runtime providers expose the central aggregated view while preserving scope as part of identity. This allows two independent plugins to use the same local table, manifest, or report identifier without requiring project-specific composition.
+
 ### `IQueryCompiler`
 
 Compiler interface for transforming structured query definitions into executable query statements.
