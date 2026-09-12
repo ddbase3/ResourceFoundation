@@ -28,6 +28,7 @@ Project plugins or custom bootstraps decide which implementation is active at ru
 	* [`IEntityFileService`](#ientityfileservice)
 	* [`IFileStorage`](#ifilestorage)
 	* [`IQueryService`](#iqueryservice)
+	* [`IReportExporter`](#ireportexporter)
 	* [`IQuerySchemaProvider`](#iqueryschemaprovider)
 	* [`IQueryCompiler`](#iquerycompiler)
 	* [Materialization Interfaces](#materialization-interfaces)
@@ -251,6 +252,21 @@ public function listTags(): array;
 
 The method `executeQuery()` receives a structured query array and returns a `QueryResult` DTO.
 This keeps query construction portable and allows implementations to validate query definitions against schema metadata.
+
+### `IReportExporter`
+
+Neutral result-export contract for transforming an already executed `QueryResult` into a string or file representation.
+
+```php
+public function setResult(QueryResult $result): self;
+public function getResult(): ?QueryResult;
+public function toString(): string;
+public function toFile(string $filePath): self;
+public function getMimeType(): string;
+public function getFileExtension(): string;
+```
+
+Exporter implementations are discoverable through `IClassMap` and are addressed by their exact `IBase::getName()` value. The exporter contract does not execute queries. Query execution stays behind `IQueryService`, which keeps query implementations independent from presentation/export plugins. See `docs/report-export.md`.
 
 ### `IQuerySchemaProvider`
 
