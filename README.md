@@ -660,3 +660,8 @@ ResourceFoundation unifies entity management, file storage, query schemas, resou
 
 It is the foundation for content, document, knowledge, XRM, CRM, and automation features in the BASE3 ecosystem.
 Concrete implementations such as Memora provide the actual storage behavior, while consumer plugins remain portable by depending on ResourceFoundation APIs.
+
+## Documentation
+
+- [Frequently Asked Questions](docs/faq.md)
+- [Privacy and data processing](PRIVACY.md)
