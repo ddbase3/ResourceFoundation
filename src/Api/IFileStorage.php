@@ -46,6 +46,31 @@ interface IFileStorage {
 	public function write(string $path, string $content): bool;
 
 	/**
+	 * Copy a file within this storage.
+	 *
+	 * Source and target refer to paths in the same logical storage instance.
+	 * Cross-storage copies belong to the calling service.
+	 *
+	 * @param string $source Source file path
+	 * @param string $target Target file path
+	 * @return bool True on success, false otherwise
+	 */
+	public function copy(string $source, string $target): bool;
+
+	/**
+	 * Move a file within this storage.
+	 *
+	 * Source and target refer to paths in the same logical storage instance.
+	 * The source must only be removed after the target operation succeeded.
+	 * Cross-storage moves belong to the calling service.
+	 *
+	 * @param string $source Source file path
+	 * @param string $target Target file path
+	 * @return bool True on success, false otherwise
+	 */
+	public function move(string $source, string $target): bool;
+
+	/**
 	 * Delete a file.
 	 * @param string $path Path to the file
 	 * @return bool True on success, false otherwise
@@ -80,4 +105,3 @@ interface IFileStorage {
 	 */
 	public function stat(string $path): ?array;
 }
-

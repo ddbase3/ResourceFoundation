@@ -90,7 +90,7 @@ ResourceFoundation does not automatically treat these values as anonymous.
 
 `IEntityFileService` supports file payloads containing Base64-encoded content and metadata. `getFileContent()` can return either Base64 or raw content, depending on options.
 
-`IFileStorage` can read and write arbitrary file content and expose file metadata through `stat()`.
+`IFileStorage` can read and write arbitrary file content, copy or move files within one logical storage, and expose file metadata through `stat()`. A copy can create an additional persisted copy of personal or confidential content, while a move can change the logical storage path under which that content is reachable.
 
 File content can contain personal or confidential data. The concrete storage implementation is responsible for storage location, transport security, encryption if required, access enforcement, backup behavior, retention, and deletion.
 

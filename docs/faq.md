@@ -52,7 +52,7 @@ ResourceFoundation separates file entities from file storage.
 
 `IEntityFileService` models files as resource entities. Its normalized payload can include filename, Base64-encoded content, MIME type, size, name, description, caption-like content, preview data, tags, metadata, relations, and access information.
 
-`IFileStorage` is the lower-level storage abstraction for listing, reading, writing, deleting, creating directories, removing directories, checking existence, and reading file metadata.
+`IFileStorage` is the lower-level storage abstraction for listing, reading, writing, copying, moving, deleting, creating directories, removing directories, checking existence, and reading file metadata. `copy()` and `move()` address source and target paths inside the same logical storage. Cross-storage transfers remain outside the storage contract.
 
 A concrete system can therefore keep file metadata in one backend and file bytes in another.
 

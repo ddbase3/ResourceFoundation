@@ -229,6 +229,8 @@ Generic file storage interface independent of entity metadata.
 public function list(string $path = ''): array;
 public function read(string $path): string;
 public function write(string $path, string $content): bool;
+public function copy(string $source, string $target): bool;
+public function move(string $source, string $target): bool;
 public function delete(string $path): bool;
 public function mkdir(string $path): bool;
 public function rmdir(string $path): bool;
@@ -236,7 +238,7 @@ public function exists(string $path): bool;
 public function stat(string $path): ?array;
 ```
 
-`IFileStorage` can be implemented by local storage, WebDAV, Nextcloud, S3, memory-backed storage, or project-specific storage.
+`IFileStorage` can be implemented by local storage, WebDAV, Nextcloud, S3, memory-backed storage, or project-specific storage. `copy()` and `move()` operate within one logical storage instance so backends can use native server-side operations where available. Cross-storage transfers remain a responsibility of the calling service.
 
 ### `IFileStorageFactory`
 
@@ -587,7 +589,7 @@ $tagService->addEntryTags(123, ['important']);
 ### WebDAV / Nextcloud / File Storage
 
 A WebDAV adapter can expose an `IFileStorage` implementation as a DAV endpoint.
-The `IFileStorage` interface maps naturally to operations like PROPFIND, GET, PUT, DELETE, MKCOL, and stat-like metadata reads.
+The `IFileStorage` interface maps naturally to operations like PROPFIND, GET, PUT, COPY, MOVE, DELETE, MKCOL, and stat-like metadata reads.
 
 Example:
 
