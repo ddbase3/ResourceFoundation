@@ -60,6 +60,12 @@ A concrete system can therefore keep file metadata in one backend and file bytes
 
 The interface is storage-neutral. The source documentation names local filesystems, WebDAV, S3, FTP, and other backends as possible implementations. ResourceFoundation itself does not select one.
 
+## When should I use `IFileStorageFactory` instead of injecting `IFileStorage`?
+
+Inject `IFileStorage` when the runtime has one already selected storage instance. Use `IFileStorageFactory` when a service must open different logical storages from runtime context, for example one storage per domain object or one storage per configured remote profile.
+
+The factory accepts an implementation-specific `id` and `mode` and returns the normal `IFileStorage` contract. The caller remains responsible for storing that identifier. `IFileStorageFactory` intentionally does not define generic storage creation or identifier persistence because those lifecycles differ between backends.
+
 ## What is `IQueryService`?
 
 `IQueryService` is the generic structured-query boundary. It provides:

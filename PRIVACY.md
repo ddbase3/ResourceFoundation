@@ -4,7 +4,7 @@ This document describes privacy-relevant behavior of the ResourceFoundation comp
 
 ## Component role
 
-ResourceFoundation defines common interfaces for entity data, file data, query services, query schemas, report export, materialization, resource access, relations, metadata, tags, profiles, activity information, and per-user resource data.
+ResourceFoundation defines common interfaces for entity data, file data, file storage and file-storage factories, query services, query schemas, report export, materialization, resource access, relations, metadata, tags, profiles, activity information, and per-user resource data.
 
 Most interfaces operate on generic arrays or DTOs because the foundation must remain independent of a particular database schema or storage technology.
 
@@ -93,6 +93,14 @@ ResourceFoundation does not automatically treat these values as anonymous.
 `IFileStorage` can read and write arbitrary file content and expose file metadata through `stat()`.
 
 File content can contain personal or confidential data. The concrete storage implementation is responsible for storage location, transport security, encryption if required, access enforcement, backup behavior, retention, and deletion.
+
+## File storage factories
+
+`IFileStorageFactory` can receive an implementation-specific storage identifier and mode in order to open an `IFileStorage` instance. ResourceFoundation does not persist, resolve, log, or classify those values itself.
+
+Depending on the selected implementation, a storage identifier can still be privacy-relevant or operationally sensitive, for example when it identifies a user-owned storage area, an object-specific resource, or a remote account profile. The concrete factory and calling application are responsible for access control, identifier persistence, retention, and avoiding unnecessary disclosure in logs or user interfaces.
+
+The generic factory contract does not create a storage identifier and does not define retention for the opened storage.
 
 ## Query metadata and result data
 

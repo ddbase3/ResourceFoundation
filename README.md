@@ -27,6 +27,7 @@ Project plugins or custom bootstraps decide which implementation is active at ru
 	* [`IEntityDataService`](#ientitydataservice)
 	* [`IEntityFileService`](#ientityfileservice)
 	* [`IFileStorage`](#ifilestorage)
+	* [`IFileStorageFactory`](#ifilestoragefactory)
 	* [`IQueryService`](#iqueryservice)
 	* [`IReportExporter`](#ireportexporter)
 	* [`IQuerySchemaProvider`](#iqueryschemaprovider)
@@ -236,6 +237,20 @@ public function stat(string $path): ?array;
 ```
 
 `IFileStorage` can be implemented by local storage, WebDAV, Nextcloud, S3, memory-backed storage, or project-specific storage.
+
+### `IFileStorageFactory`
+
+`IFileStorageFactory` is the construction boundary for context-specific file storages that cannot be registered as one shared `IFileStorage` instance.
+
+```php
+public function openStorage(string $id, string $mode): IFileStorage;
+```
+
+The `id` and `mode` values are intentionally implementation-specific. A host adapter can use them for a remote storage profile, an object-specific storage identifier, a storage backend mode, or another stable addressing model. The factory opens an existing logical storage and returns it through the normal `IFileStorage` contract.
+
+The lifecycle and persistence of the storage identifier remain outside the factory. The generic factory does not create identifiers or persist them for the calling domain. This keeps object ownership and storage provisioning at the responsible application boundary.
+
+Use `IFileStorageFactory` when runtime context determines which storage instance is needed. Continue binding `IFileStorage` directly when one shared storage is the final runtime choice.
 
 ### `IQueryService`
 
@@ -656,7 +671,7 @@ When building a project plugin, bind the final implementation in the container.
 
 ## Summary
 
-ResourceFoundation unifies entity management, file storage, query schemas, resource profiles, roles and access, relations, metadata, tags, comments, structure definitions, user data, and microservice-ready proxies under one consistent set of contracts.
+ResourceFoundation unifies entity management, file storage, context-specific file-storage factories, query schemas, resource profiles, roles and access, relations, metadata, tags, comments, structure definitions, user data, and microservice-ready proxies under one consistent set of contracts.
 
 It is the foundation for content, document, knowledge, XRM, CRM, and automation features in the BASE3 ecosystem.
 Concrete implementations such as Memora provide the actual storage behavior, while consumer plugins remain portable by depending on ResourceFoundation APIs.
