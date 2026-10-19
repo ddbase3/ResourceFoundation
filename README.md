@@ -35,7 +35,6 @@ Project plugins or custom bootstraps decide which implementation is active at ru
 	* [Materialization Interfaces](#materialization-interfaces)
 * [Expanded Entity Service Contracts](#expanded-entity-service-contracts)
 	* [`IEntityProfileService`](#ientityprofileservice)
-	* [`IEntityAccessService`](#ientityaccessservice)
 	* [`IEntityRelationService`](#ientityrelationservice)
 	* [`IEntityMetadataService`](#ientitymetadataservice)
 	* [`IEntityTagService`](#ientitytagservice)
@@ -153,8 +152,10 @@ They are useful for saved filters, active working contexts, table column presets
 
 ### Access
 
-Access is the boundary around users, groups, roles, grants, and memberships.
-ResourceFoundation does not define the table layout. It defines service methods for managing access-related resource structures.
+Access is a native backend concern, not an additional ResourceFoundation authorization subsystem.
+Plugins use BASE3 `IAuthorizationService` for decisions and `IAuthorizationAdministrationService`
+for native grant administration. Entity query implementations must enforce native resource-access
+constraints before returning large result sets. No generic role/grant storage is introduced here.
 
 ### Structure
 
@@ -368,32 +369,6 @@ public function setActiveProfile(int $userId, int $profileId): void;
 
 Use this for saved filters, active profiles, default views, and user-specific entity list configuration.
 
-### `IEntityAccessService`
-
-Access management for entries, users, groups, roles, and memberships.
-
-```php
-public function getEntryAccess(int|string $entryId): array;
-public function replaceEntryUserAccess(int|string $entryId, array $access): void;
-public function replaceEntryGroupAccess(int|string $entryId, array $access): void;
-public function replaceEntryRoleAccess(int|string $entryId, array $access): void;
-public function getRoles(bool $includeArchived = false): array;
-public function getRole(int|string $roleId): ?array;
-public function createRole(array $role): int|string;
-public function updateRole(int|string $roleId, array $patch): void;
-public function archiveRole(int|string $roleId): void;
-public function getUserRoles(int|string $userId): array;
-public function getGroupRoles(int|string $groupId): array;
-public function getEffectiveUserRoles(int|string $userId): array;
-public function replaceUserRoles(int|string $userId, array $roleIds): void;
-public function replaceGroupRoles(int|string $groupId, array $roleIds): void;
-public function getUserGroups(int|string $userId): array;
-public function replaceUserGroups(int|string $userId, array $groupIds): void;
-```
-
-This interface separates entry-level grants from reusable roles.
-The exact role model belongs to the implementation, but the public operations remain stable.
-
 ### `IEntityRelationService`
 
 Entity-to-entity relation management.
@@ -504,7 +479,6 @@ Proxy classes:
 ResourceFoundation\Proxy\EntityDataProxy
 ResourceFoundation\Proxy\EntityFileProxy
 ResourceFoundation\Proxy\EntityProfileProxy
-ResourceFoundation\Proxy\EntityAccessProxy
 ResourceFoundation\Proxy\EntityRelationProxy
 ResourceFoundation\Proxy\EntityMetadataProxy
 ResourceFoundation\Proxy\EntityTagProxy
@@ -515,27 +489,9 @@ ResourceFoundation\Proxy\EntityUserDataProxy
 
 A project plugin can bind a proxy where a local implementation would normally be used.
 
-Example:
-
-```php
-use Base3\Api\IContainer;
-use ResourceFoundation\Api\IEntityAccessService;
-use ResourceFoundation\Proxy\EntityAccessProxy;
-
-$container->set(
-	IEntityAccessService::class,
-	fn($c) => new EntityAccessProxy(
-		$c->get('microservicehelper')->get(
-			'Xrm',
-			IEntityAccessService::class,
-			'entityaccessmicroservice'
-		)
-	),
-	IContainer::SHARED
-);
-```
-
-This allows the same consumer plugin to run against a local Memora backend or a remote XRM backend.
+Authorization interfaces are defined by `Base3Framework/src/Authorization/Api/`. Projects bind
+native authority implementations directly. An embedded host must not create a second resource
+ACL store or duplicate role management through ResourceFoundation.
 
 ---
 
@@ -550,7 +506,6 @@ Example implementation mapping in Memora:
 IEntityDataService      -> MemoraEntityDataService
 IEntityFileService      -> MemoraEntityFileService
 IEntityProfileService   -> MemoraProfileService
-IEntityAccessService    -> MemoraAccessService
 IEntityRelationService  -> MemoraRelationService
 IEntityMetadataService  -> MemoraMetadataService
 IEntityTagService       -> MemoraTagService

@@ -28,7 +28,7 @@ The contract deliberately uses generic arrays and `int|string` identifiers so im
 
 ResourceFoundation separates optional entity concerns into focused contracts:
 
-- `IEntityAccessService` for entry grants, roles, permissions, user roles, group roles, and group memberships
+- `IAuthorizationService` (from Base3Framework) for authoritative permission decisions and `IAuthorizationAdministrationService` for host-owned grant administration
 - `IEntityActivityService` for logs and comments
 - `IEntityMetadataService` for shared key-value metadata
 - `IEntityProfileService` for user-owned profiles and an active profile
@@ -177,7 +177,7 @@ No. It defines the contracts and data structures. A concrete implementation is r
 
 ## What are the proxy classes?
 
-ResourceFoundation contains proxies such as `EntityDataProxy`, `EntityAccessProxy`, and corresponding proxies for the other entity subservices.
+ResourceFoundation contains proxies such as `EntityDataProxy` and corresponding proxies for the other entity subservices.
 
 These proxies implement ResourceFoundation interfaces and forward calls through `Base3\Microservice\Api\IMicroserviceConnector`. This allows a project to bind a ResourceFoundation service to a remote provider without changing the consumer contract.
 
@@ -189,7 +189,7 @@ No. The proxy classes only become active when project composition selects them a
 
 ResourceFoundation defines access-related contracts and query-service semantics, but it does not provide a universal authorization implementation.
 
-The active implementation is responsible for enforcing access at the appropriate resource boundary. Consumers should not treat the existence of `IEntityAccessService`, sensitivity flags, or query schema metadata as proof that a particular backend has already applied an access decision.
+The active implementation is responsible for enforcing access at the appropriate resource boundary. Consumers should not treat the existence of the authorization interfaces, sensitivity flags, or query schema metadata as proof that a particular backend has already applied an access decision.
 
 ## Does ResourceFoundation authenticate users?
 

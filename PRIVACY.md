@@ -51,20 +51,12 @@ ResourceFoundation does not automatically minimize, redact, pseudonymize, or cla
 
 ## Access and authorization data
 
-`IEntityAccessService` can process:
-
-- direct entry grants for users and groups
-- role definitions
-- permission definitions
-- role-permission assignments
-- roles assigned to users
-- roles assigned to groups
-- group membership of users
-- effective user roles
-
-These structures can reveal organizational relationships and authorization information.
-
-The existence of this contract does not create a universal authorization layer. A concrete backend must enforce the access model it exposes.
+ResourceFoundation no longer exposes an independent entity-ACL or RBAC administration
+contract. Native resource backends may process role and group memberships, effective
+permissions, and grants when implementing the shared BASE3 authorization contracts.
+The precise processing, retention, storage, deletion, and rights-to-information procedures
+remain owned by those host/backends and require implementation- and deployment-specific
+verification. The ResourceFoundation contract itself does not persist those grants.
 
 ## Profiles and per-user data
 
@@ -235,3 +227,11 @@ Concrete ResourceFoundation implementations should document and test, where appl
 - microservice boundaries
 
 ResourceFoundation provides the stable contracts. It does not replace these implementation responsibilities.
+
+## Authorization contract removal (2026-10-19)
+
+The deprecated `IEntityAccessService` and its remote proxy were removed. Permission
+decisions and native rights administration now use the shared BASE3 authorization
+contracts; ResourceFoundation only exposes its remaining resource/data interfaces.
+Concrete resource backends continue to own access filtering, any personal data
+contained in their entities, native grant retention and deletion.
