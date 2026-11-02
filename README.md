@@ -473,6 +473,15 @@ Use this for user-specific resource state such as pinned flags, UI state, per-us
 ResourceFoundation includes proxy classes for microservice-based deployments.
 A proxy implements the same ResourceFoundation interface as the local service, but delegates calls to a microservice connector object.
 
+For `EntityDataProxy::getEntries()`, a successfully returned empty array means
+that the query had no matches. A `null` connector result means no trustworthy
+result was received and raises `RuntimeException`; it is never converted to
+an empty result. Other connector exceptions are propagated. Consumers that
+reconcile deletions must not interpret a failed remote read as a complete empty
+source. The backend still determines the filters, authorization and any
+pagination semantics.
+
+
 Proxy classes:
 
 ```text

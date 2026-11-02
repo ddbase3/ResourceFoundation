@@ -27,9 +27,14 @@ interface IEntityDataService {
 	/**
 	 * Returns a list of entities based on the given options.
 	 * Options may include filters, sorting, or loading instructions.
+	 * A successful query with no matches returns an empty array. Implementations
+	 * must not substitute an empty array for an unavailable or failed result.
+	 * A query is complete according to its requested filter and pagination
+	 * options; authorization restrictions are determined by the active backend.
 	 *
 	 * @param array $options Query or loading options
-	 * @return array List of entities as associative arrays
+	 * @return array List of entities as associative arrays; [] only for successful empty queries
+	 * @throws \RuntimeException If no trustworthy query result can be obtained
 	 */
 	public function getEntries(array $options = []): array;
 

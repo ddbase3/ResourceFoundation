@@ -19,6 +19,7 @@ namespace ResourceFoundation\Proxy;
 
 use Base3\Microservice\Api\IMicroserviceConnector;
 use ResourceFoundation\Api\IEntityDataService;
+use RuntimeException;
 
 class EntityDataProxy implements IEntityDataService {
 
@@ -29,7 +30,11 @@ class EntityDataProxy implements IEntityDataService {
 	// Implementation of IEntityDataService
 
 	public function getEntries(array $options = []): array {
-		return $this->entityDataService->getEntries($options) ?? [];
+		$entries = $this->entityDataService->getEntries($options);
+		if ($entries === null) {
+			throw new RuntimeException("Entity data microservice did not return an entries result.");
+		}
+		return $entries;
 	}
 
 	public function getEntry(int|string $id, array $options = []): ?array {

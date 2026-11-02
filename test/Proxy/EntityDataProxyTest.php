@@ -8,11 +8,11 @@ use Base3\Microservice\Api\IMicroserviceConnector;
 
 class EntityDataProxyTest extends TestCase {
 
-	public function testGetEntriesDelegatesAndFallsBackToEmptyArray(): void {
+	public function testGetEntriesDelegatesSuccessfulQueries(): void {
 		$conn = new FakeEntityDataConnector();
 		$proxy = new EntityDataProxy($conn);
 
-		$conn->entriesResult = null;
+		$conn->entriesResult = [];
 		$out = $proxy->getEntries(['limit' => 10]);
 
 		$this->assertSame('getEntries', $conn->lastCall);
@@ -23,6 +23,16 @@ class EntityDataProxyTest extends TestCase {
 		$out = $proxy->getEntries();
 
 		$this->assertSame([['id' => 1], ['id' => 2]], $out);
+	}
+
+	public function testGetEntriesRejectsMissingMicroserviceResult(): void {
+		$conn = new FakeEntityDataConnector();
+		$proxy = new EntityDataProxy($conn);
+
+		$conn->entriesResult = null;
+		$this->expectException(\RuntimeException::class);
+		$this->expectExceptionMessage('did not return an entries result');
+		$proxy->getEntries(['type' => 'file']);
 	}
 
 	public function testGetEntryDelegates(): void {

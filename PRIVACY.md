@@ -160,7 +160,13 @@ ResourceFoundation does not itself create or retain materialized copies. A concr
 
 ResourceFoundation includes entity service proxies backed by `IMicroserviceConnector`. If a project binds one of these proxies as the active service, method arguments and results can cross a service or network boundary according to the connector configuration.
 
-The proxy layer does not itself choose a remote endpoint, transport encryption, authentication mechanism, processing region, or retention policy. Those properties belong to the configured microservice infrastructure.
+The proxy layer does not itself choose a remote endpoint, transport encryption, authentication mechanism, processing region, or retention policy.
+
+`EntityDataProxy::getEntries()` propagates missing connector results as errors
+instead of silently representing them as an empty source. This prevents
+consumers from mistaking a transport failure for a verified empty result, but
+does not itself determine which entities are authorized, published, retained
+or deleted. Those properties belong to the configured microservice infrastructure.
 
 When proxies are used, the installation should document:
 
