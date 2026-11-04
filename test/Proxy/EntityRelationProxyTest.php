@@ -45,3 +45,5 @@ final class EntityRelationProxyTest extends TestCase {
 		(new EntityRelationProxy($connector))->removeRelations(1, [2]);
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

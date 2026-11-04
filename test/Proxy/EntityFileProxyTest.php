@@ -70,3 +70,5 @@ final class EntityFileProxyTest extends TestCase {
 		(new EntityFileProxy($connector))->deleteFile('file-1');
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

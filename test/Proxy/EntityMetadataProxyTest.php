@@ -56,3 +56,5 @@ final class EntityMetadataProxyTest extends TestCase {
 		(new EntityMetadataProxy($connector))->replaceMetadata(5, []);
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

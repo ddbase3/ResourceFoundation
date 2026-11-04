@@ -68,3 +68,5 @@ final class EntityActivityProxyTest extends TestCase {
 		$proxy->addComment(1, 'cannot save');
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

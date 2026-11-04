@@ -64,3 +64,5 @@ final class EntityProfileProxyTest extends TestCase {
 		(new EntityProfileProxy($connector))->createProfile(1, []);
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

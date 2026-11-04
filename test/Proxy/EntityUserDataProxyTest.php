@@ -56,3 +56,5 @@ final class EntityUserDataProxyTest extends TestCase {
 		(new EntityUserDataProxy($connector))->setUserData(1, ['private' => true], 2);
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

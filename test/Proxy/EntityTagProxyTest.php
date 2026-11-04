@@ -76,3 +76,5 @@ final class EntityTagProxyTest extends TestCase {
 		(new EntityTagProxy($connector))->replaceEntryTags(1, ['test']);
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';

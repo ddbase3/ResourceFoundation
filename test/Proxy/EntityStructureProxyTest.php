@@ -103,3 +103,5 @@ final class EntityStructureProxyTest extends TestCase {
 		(new EntityStructureProxy($connector))->assignModuleToScope('courses', 'private');
 	}
 }
+
+require_once __DIR__ . '/RecordingEntityConnector.php';
