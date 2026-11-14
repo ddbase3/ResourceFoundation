@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Dto;
+namespace Base3\ResourceFoundation\Dto;
 
 /**
  * Describes one user-facing reporting scope and its technical provider scopes.

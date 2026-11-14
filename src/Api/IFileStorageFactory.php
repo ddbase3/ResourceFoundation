@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
 /**
  * Creates context-specific file storage instances.

@@ -15,9 +15,9 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use ResourceFoundation\Dto\QueryStatement;
+use Base3\ResourceFoundation\Dto\QueryStatement;
 
 /**
  * Generic compiler interface for transforming structured query definitions

@@ -2,9 +2,9 @@
 
 ## Purpose
 
-`ResourceFoundation\Api\IReportExporter` is the neutral BASE3 contract for transforming an already executed `QueryResult` into another representation.
+`Base3\ResourceFoundation\Api\IReportExporter` is the neutral BASE3 contract for transforming an already executed `QueryResult` into another representation.
 
-The contract deliberately does not execute queries. Query execution stays behind `ResourceFoundation\Api\IQueryService`.
+The contract deliberately does not execute queries. Query execution stays behind `Base3\ResourceFoundation\Api\IQueryService`.
 
 This separation keeps the dependency direction clear:
 

@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
 /**
  * Provides log and comment access for entities.

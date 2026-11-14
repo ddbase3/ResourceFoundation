@@ -15,6 +15,6 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Exception;
+namespace Base3\ResourceFoundation\Exception;
 
 class MaterializationException extends \RuntimeException {}

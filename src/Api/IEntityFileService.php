@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
 /**
  * Generic interface for managing file entities.

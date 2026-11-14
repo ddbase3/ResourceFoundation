@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
 /**
  * Owns the lifecycle of file storages addressed by a stable logical owner.

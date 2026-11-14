@@ -15,10 +15,10 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation;
+namespace Base3\ResourceFoundation;
 
-use Base3\Api\IContainer;
-use Base3\Api\IPlugin;
+use Base3\CoreFoundation\Api\IContainer;
+use Base3\CoreFoundation\Api\IPlugin;
 
 class ResourceFoundationPlugin implements IPlugin {
 

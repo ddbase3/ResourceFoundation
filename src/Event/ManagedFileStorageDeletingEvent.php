@@ -15,7 +15,7 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Event;
+namespace Base3\ResourceFoundation\Event;
 
 final class ManagedFileStorageDeletingEvent {
 

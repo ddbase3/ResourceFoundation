@@ -15,10 +15,10 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use Base3\Api\IBase;
-use ResourceFoundation\Dto\QueryResult;
+use Base3\CoreFoundation\Api\IBase;
+use Base3\ResourceFoundation\Dto\QueryResult;
 
 /**
  * Converts an already executed QueryResult into an export representation.

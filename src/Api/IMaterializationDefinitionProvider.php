@@ -15,9 +15,9 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use Base3\Api\IBase;
+use Base3\CoreFoundation\Api\IBase;
 
 /**
  * Provides declarative materialization definitions for one logical scope.

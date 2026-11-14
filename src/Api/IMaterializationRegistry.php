@@ -15,9 +15,9 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use ResourceFoundation\Dto\MaterializationGeneration;
+use Base3\ResourceFoundation\Dto\MaterializationGeneration;
 
 interface IMaterializationRegistry {
 

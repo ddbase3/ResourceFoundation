@@ -15,6 +15,6 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
 interface IMaterializationSchemaProvider extends IQuerySchemaProvider, IMaterializationManifestProvider {}

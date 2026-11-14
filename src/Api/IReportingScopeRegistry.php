@@ -15,9 +15,9 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use ResourceFoundation\Dto\ReportingScopeDefinition;
+use Base3\ResourceFoundation\Dto\ReportingScopeDefinition;
 
 /**
  * Resolves user-facing reporting scopes.

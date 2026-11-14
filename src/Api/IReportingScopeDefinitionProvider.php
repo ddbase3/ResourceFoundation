@@ -15,10 +15,10 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use Base3\Api\IBase;
-use ResourceFoundation\Dto\ReportingScopeDefinition;
+use Base3\CoreFoundation\Api\IBase;
+use Base3\ResourceFoundation\Dto\ReportingScopeDefinition;
 
 /**
  * Provides one user-facing reporting scope.

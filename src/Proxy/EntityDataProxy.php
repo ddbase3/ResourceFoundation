@@ -15,10 +15,10 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Proxy;
+namespace Base3\ResourceFoundation\Proxy;
 
-use Base3\Microservice\Api\IMicroserviceConnector;
-use ResourceFoundation\Api\IEntityDataService;
+use Base3\CoreFoundation\Microservice\Api\IMicroserviceConnector;
+use Base3\ResourceFoundation\Api\IEntityDataService;
 use RuntimeException;
 
 class EntityDataProxy implements IEntityDataService {

@@ -74,7 +74,7 @@ The intended dependency direction is:
 
 ```text
 Consumer plugin
-  -> ResourceFoundation\Api interface
+  -> Base3\ResourceFoundation\Api interface
     -> implementation selected by project composition
 ```
 
@@ -199,7 +199,7 @@ Concrete implementations may support additional load options, filter options, cr
 Example:
 
 ```php
-use ResourceFoundation\Api\IEntityDataService;
+use Base3\ResourceFoundation\Api\IEntityDataService;
 
 $entry = $entityDataService->getEntry(42, [
 	'loadname' => true,
@@ -485,20 +485,20 @@ pagination semantics.
 Proxy classes:
 
 ```text
-ResourceFoundation\Proxy\EntityDataProxy
-ResourceFoundation\Proxy\EntityFileProxy
-ResourceFoundation\Proxy\EntityProfileProxy
-ResourceFoundation\Proxy\EntityRelationProxy
-ResourceFoundation\Proxy\EntityMetadataProxy
-ResourceFoundation\Proxy\EntityTagProxy
-ResourceFoundation\Proxy\EntityStructureProxy
-ResourceFoundation\Proxy\EntityActivityProxy
-ResourceFoundation\Proxy\EntityUserDataProxy
+Base3\ResourceFoundation\Proxy\EntityDataProxy
+Base3\ResourceFoundation\Proxy\EntityFileProxy
+Base3\ResourceFoundation\Proxy\EntityProfileProxy
+Base3\ResourceFoundation\Proxy\EntityRelationProxy
+Base3\ResourceFoundation\Proxy\EntityMetadataProxy
+Base3\ResourceFoundation\Proxy\EntityTagProxy
+Base3\ResourceFoundation\Proxy\EntityStructureProxy
+Base3\ResourceFoundation\Proxy\EntityActivityProxy
+Base3\ResourceFoundation\Proxy\EntityUserDataProxy
 ```
 
 A project plugin can bind a proxy where a local implementation would normally be used.
 
-Authorization interfaces are defined by `Base3Framework/src/Authorization/Api/`. Projects bind
+Authorization interfaces are defined by `plugin/CoreFoundation/src/Authorization/Api/`. Projects bind
 native authority implementations directly. An embedded host must not create a second resource
 ACL store or duplicate role management through ResourceFoundation.
 

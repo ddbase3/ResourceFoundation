@@ -28,7 +28,7 @@ The contract deliberately uses generic arrays and `int|string` identifiers so im
 
 ResourceFoundation separates optional entity concerns into focused contracts:
 
-- `IAuthorizationService` (from Base3Framework) for authoritative permission decisions and `IAuthorizationAdministrationService` for host-owned grant administration
+- `IAuthorizationService` (from CoreFoundation) for authoritative permission decisions and `IAuthorizationAdministrationService` for host-owned grant administration
 - `IEntityActivityService` for logs and comments
 - `IEntityMetadataService` for shared key-value metadata
 - `IEntityProfileService` for user-owned profiles and an active profile
@@ -179,7 +179,7 @@ No. It defines the contracts and data structures. A concrete implementation is r
 
 ResourceFoundation contains proxies such as `EntityDataProxy` and corresponding proxies for the other entity subservices.
 
-These proxies implement ResourceFoundation interfaces and forward calls through `Base3\Microservice\Api\IMicroserviceConnector`. This allows a project to bind a ResourceFoundation service to a remote provider without changing the consumer contract.
+These proxies implement ResourceFoundation interfaces and forward calls through `Base3\CoreFoundation\Microservice\Api\IMicroserviceConnector`. This allows a project to bind a ResourceFoundation service to a remote provider without changing the consumer contract.
 
 ## Does using ResourceFoundation automatically create a microservice connection?
 

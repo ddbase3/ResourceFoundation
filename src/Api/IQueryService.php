@@ -15,10 +15,10 @@
  * https://github.com/ddbase3/ResourceFoundation
  **********************************************************************/
 
-namespace ResourceFoundation\Api;
+namespace Base3\ResourceFoundation\Api;
 
-use ResourceFoundation\Dto\QueryResult;
-use ResourceFoundation\Dto\TableMetadata;
+use Base3\ResourceFoundation\Dto\QueryResult;
+use Base3\ResourceFoundation\Dto\TableMetadata;
 
 /**
  * Generic query service interface providing access to data tables,
@@ -48,8 +48,8 @@ interface IQueryService {
 	 * @param array $queryJson Structured query definition
 	 * @return QueryResult Query result data
 	 *
-	 * @throws \ResourceFoundation\Exception\AccessDeniedException
-	 * @throws \ResourceFoundation\Exception\QueryValidationException
+	 * @throws \Base3\ResourceFoundation\Exception\AccessDeniedException
+	 * @throws \Base3\ResourceFoundation\Exception\QueryValidationException
 	 */
 	public function executeQuery(array $queryJson): QueryResult;
 
